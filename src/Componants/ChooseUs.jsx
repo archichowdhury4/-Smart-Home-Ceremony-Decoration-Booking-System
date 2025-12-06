@@ -1,4 +1,5 @@
 import { FaUsers, FaClock, FaPalette, FaMoneyBillWave, FaCheckCircle, FaHeadset } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function ChooseUs() {
   const points = [
@@ -37,13 +38,17 @@ export default function ChooseUs() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {points.map((point, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
               className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center"
             >
               <div className="mb-4">{point.icon}</div>
               <h3 className="text-lg font-semibold text-gray-800">{point.title}</h3>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

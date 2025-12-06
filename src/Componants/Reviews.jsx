@@ -1,6 +1,7 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-export default function Testimonials() {
+export default function Reviews() {
   const reviews = [
     {
       name: "Sadia Rahman",
@@ -32,8 +33,12 @@ export default function Testimonials() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
               className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center 
                          transform transition duration-300 hover:scale-105 hover:shadow-2xl"
             >
@@ -55,7 +60,7 @@ export default function Testimonials() {
               </div>
               <p className="text-gray-700 mb-2">"{review.feedback}"</p>
               <h3 className="text-gray-900 font-semibold">{review.name}</h3>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
