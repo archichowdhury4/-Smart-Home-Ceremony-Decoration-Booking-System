@@ -1,59 +1,107 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { registerUser } = useAuth();
 
     const handleRegistration = (data) => {
-            console.log("after register", data)
-    }
+        registerUser(data.email, data.password)
+            .then(result => console.log(result.user))
+            .catch(error => console.log(error));
+    };
+
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <form
-            onSubmit={handleSubmit(handleRegistration)}
-            className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-                <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
-                
-                <div className="mb-4">
-                    {/* email */}
-                    <label className="block text-gray-700 font-medium mb-2">Email</label>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br 
+        from-blue-200/40 via-purple-200/40 to-pink-200/40 px-4">
+
+            {/* GLASS CARD */}
+            <motion.form
+                onSubmit={handleSubmit(handleRegistration)}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="p-10 w-full max-w-sm rounded-3xl shadow-2xl border 
+                bg-white/20 backdrop-blur-xl border-white/30"
+            >
+                {/* TITLE */}
+                <motion.h2
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-3xl font-semibold text-center mb-8 text-gray-800 tracking-wide"
+                >
+                    Create your Account
+                </motion.h2>
+
+                {/* EMAIL */}
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.25 }}
+                    className="mb-6"
+                >
+                    <label className="block text-gray-800 font-medium mb-2">Email</label>
                     <input
                         type="email"
-                        {...register('email', {required: true})}
+                        {...register("email", { required: true })}
                         placeholder="Enter your email"
-                        className="input w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
+                        border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 
+                        transition-all"
                     />
-                    {errors.email?.type === "required" && <p className='text-red-500'>Email is required</p>}
-                </div>
-                {/* password */}
-                <div className="mb-4">
-                    <label className="block text-gray-700 font-medium mb-2">Password</label>
+                    {errors.email && (
+                        <p className="text-red-500 text-sm mt-1">Email is required</p>
+                    )}
+                </motion.div>
+
+                {/* PASSWORD */}
+                <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.32 }}
+                    className="mb-6"
+                >
+                    <label className="block text-gray-800 font-medium mb-2">Password</label>
                     <input
                         type="password"
-                        {...register('password', {
+                        {...register("password", {
                             required: true,
-                            minLength:6
+                            minLength: 6,
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
                         })}
                         placeholder="Enter your password"
-                        className="input w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
+                        border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
-                    {errors.password?.type === "required" && <p className='text-red-500'>Password is required</p>}
-                    {errors.password?.type === "minLength" && <p className='text-red-500'>Password must be 6 character or Longer</p>}
-                </div>
+                    {errors.password?.type === "required" && (
+                        <p className='text-red-500 text-sm mt-1'>Password is required</p>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                        <p className='text-red-500 text-sm mt-1'>At least 6 characters required</p>
+                    )}
+                    {errors.password?.type === "pattern" && (
+                        <p className='text-red-500 text-sm mt-1'>
+                            Must include uppercase, lowercase, number & special character
+                        </p>
+                    )}
+                </motion.div>
 
-                <div className="text-right mb-4">
-                    <a href="#" className="text-blue-500 hover:underline text-sm">
-                        Forgot password?
-                    </a>
-                </div>
-
-                <button
+                {/* BUTTON */}
+                <motion.button
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 180 }}
                     type="submit"
-                    className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                    className="w-full bg-blue-600/80 text-white py-3 rounded-2xl font-semibold 
+                    hover:bg-blue-700/90 transition shadow-lg hover:shadow-xl backdrop-blur-sm"
                 >
                     Register
-                </button>
-            </form>
+                </motion.button>
+            </motion.form>
+
         </div>
     );
 };
