@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,8 +16,8 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br 
-        from-blue-200/40 via-purple-200/40 to-pink-200/40 backdrop-blur-0 px-4">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br 
+        from-blue-200/40 via-purple-200/40 to-pink-200/40 px-4">
 
             {/* GLASS CARD */}
             <motion.form
@@ -70,13 +72,12 @@ const Login = () => {
                         {...register('password', {
                             required: true,
                             minLength: 6,
-                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/ 
                         })}
                         placeholder="Enter your password"
                         className="w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
                         border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
-
                     {errors.password?.type === "required" && (
                         <p className='text-red-500 text-sm mt-1'>Password is required</p>
                     )}
@@ -108,13 +109,41 @@ const Login = () => {
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: "spring", stiffness: 180 }}
                     type="submit"
-                    className="w-full bg-blue-600/80 text-white py-3 rounded-2xl font-semibold 
+                    className="w-full bg-blue-600/80 text-white py-3 rounded-2xl font-semibold mb-4
                     hover:bg-blue-700/90 transition shadow-lg hover:shadow-xl backdrop-blur-sm"
                 >
                     Login
                 </motion.button>
+
+
+                 <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.42 }}
+                    className="text-right mb-2"
+                >
+                   <SocialLogin></SocialLogin>
+                </motion.div>
+
+
+                         {/* REGISTER LINK */}
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-6 text-center text-gray-800 text-sm"
+            >
+                Don't have an account?{" "}
+                <Link
+                    to="/register"
+                    className="text-blue-600 font-medium hover:underline"
+                >
+                    Register
+                </Link>
+            </motion.div>
             </motion.form>
 
+           
         </div>
     );
 };

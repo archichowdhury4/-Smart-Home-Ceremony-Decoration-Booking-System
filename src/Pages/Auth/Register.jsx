@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router';
+import SocialLogin from './SocialLogin';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,7 +16,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br 
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br 
         from-blue-200/40 via-purple-200/40 to-pink-200/40 px-4">
 
             {/* GLASS CARD */}
@@ -95,13 +97,39 @@ const Register = () => {
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: "spring", stiffness: 180 }}
                     type="submit"
-                    className="w-full bg-blue-600/80 text-white py-3 rounded-2xl font-semibold 
+                    className="w-full bg-blue-600/80 text-white py-3 rounded-2xl font-semibold mb-4
                     hover:bg-blue-700/90 transition shadow-lg hover:shadow-xl backdrop-blur-sm"
                 >
                     Register
                 </motion.button>
+
+                 <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.42 }}
+                    className="text-right mb-2"
+                >
+                   <SocialLogin></SocialLogin>
+                </motion.div>
+
+
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-6 text-center text-gray-800 text-sm"
+            >
+                Already have an account?{" "}
+                <Link
+                    to="/login"
+                    className="text-blue-600 font-medium hover:underline"
+                >
+                   Login
+                </Link>
+            </motion.div>
             </motion.form>
 
+        
         </div>
     );
 };
