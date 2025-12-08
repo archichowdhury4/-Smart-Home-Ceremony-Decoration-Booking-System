@@ -2,19 +2,56 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from './SocialLogin';
+import axios from 'axios';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser } = useAuth();
+    const { registerUser, updateUserProfile } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+     console.log("in register", location)
 
     const handleRegistration = (data) => {
-        console.log("after reg", data)
+        console.log("after reg", data.photo[0])
+        const profileImg = data.photo[0];
         registerUser(data.email, data.password)
-            .then(result => console.log(result.user))
-            .catch(error => console.log(error));
-    };
+        .then(result =>{
+            console.log(result.user)
+             
+            // store the image and get the photo url
+            const formData = new FormData()
+            formData.append("image", profileImg);
+
+
+          const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`
+
+          
+            axios.post(image_API_URL,formData)
+            .then(res => {
+              console.log("after image upload", res.data.data.url)
+
+              //  update user profile
+             const userProfile ={
+              displayName : data.name,
+              photoURL : res.data.data.url
+             }
+             updateUserProfile(userProfile)
+             .then(()=>{
+              console.log("user profile updated done")
+              navigate(location?.state||"/")
+             })
+           .catch(error =>{
+            console.log(error)
+        })
+        })
+          
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    }
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br 
@@ -166,6 +203,7 @@ const Register = () => {
             >
                 Already have an account?{" "}
                 <Link
+                state={location.state}
                     to="/login"
                     className="text-blue-600 font-medium hover:underline"
                 >

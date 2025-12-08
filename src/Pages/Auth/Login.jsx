@@ -2,16 +2,22 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInUser } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log("from data", location)
 
     const handleLogin = (data) => {
         signInUser(data.email, data.password)
-            .then(result => console.log(result.user))
+            .then(result => {
+                console.log(result.user)
+            navigate(location?.state || '/')
+            })
             .catch(error => console.log(error));
     };
 
@@ -135,6 +141,7 @@ const Login = () => {
             >
                 Don't have an account?{" "}
                 <Link
+                    state={location.state}
                     to="/register"
                     className="text-blue-600 font-medium hover:underline"
                 >
