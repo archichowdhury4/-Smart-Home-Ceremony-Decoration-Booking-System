@@ -10,6 +10,7 @@ const Register = () => {
     const { registerUser } = useAuth();
 
     const handleRegistration = (data) => {
+        console.log("after reg", data)
         registerUser(data.email, data.password)
             .then(result => console.log(result.user))
             .catch(error => console.log(error));
@@ -38,6 +39,50 @@ const Register = () => {
                     Create your Account
                 </motion.h2>
 
+
+            {/* Name */}
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.25 }}
+                    className="mb-6"
+                >
+                    <label className="block text-gray-800 font-medium mb-2">Name</label>
+                    <input
+                        type="text"
+                        {...register("name", { required: true })}
+                        placeholder="Enter your name"
+                        className="input  w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
+                        border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 
+                        transition-all"
+                    />
+                    {errors.name && (
+                        <p className="text-red-500 text-sm mt-1">Name is required</p>
+                    )}
+                </motion.div>
+
+                {/* Photo Upload */}
+
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.25 }}
+                    className="mb-6"
+                >
+                    <label className="block text-gray-800 font-medium mb-2">Photo</label>
+                    <input
+                        type="file"
+                        {...register("photo", { required: true })}
+                        className="file-input w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
+                        border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 
+                        transition-all"
+                    />
+                    {errors.photo && (
+                        <p className="text-red-500 text-sm mt-1">Photo is required</p>
+                    )}
+                </motion.div>
+
+
                 {/* EMAIL */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -50,7 +95,7 @@ const Register = () => {
                         type="email"
                         {...register("email", { required: true })}
                         placeholder="Enter your email"
-                        className="w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
+                        className="input w-full px-4 py-3 rounded-2xl bg-white/40 backdrop-blur-sm 
                         border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 
                         transition-all"
                     />
