@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import { useParams, useNavigate, useLocation, NavLink } from "react-router";
 import useAuth from "../hooks/useAuth";
 
 // React Icons
@@ -21,12 +21,12 @@ const ServiceDetails = () => {
   }, [id]);
 
   const handleBook = () => {
-    if (!user) {
-      navigate("/login", { state: { from: location.pathname } });
-      return;
-    }
-    navigate(`/book/${id}`);
-  };
+  if (!user) {
+    navigate("/login", { state: { from: location.pathname } });
+    return;
+  }
+  navigate(`/book/${id}`); 
+};
 
   if (!service) {
     return <p className="text-center mt-10">Loading service details...</p>;
@@ -85,16 +85,16 @@ const ServiceDetails = () => {
 
           {/* Price */}
           <p className="flex items-center gap-2 text-3xl font-bold text-purple-600 mt-6">
-            <FaMoneyBillWave /> ৳ {service.price}
+            <FaMoneyBillWave />  {service.price}
           </p>
 
           {/* Button */}
-          <button
+          <NavLink
             onClick={handleBook}
             className="btn bg-purple-600 text-white mt-8 hover:bg-purple-700"
           >
             Book This Service
-          </button>
+          </NavLink>
         </div>
       </div>
     </div>

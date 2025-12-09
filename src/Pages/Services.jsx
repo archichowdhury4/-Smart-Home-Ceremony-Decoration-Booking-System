@@ -138,7 +138,7 @@ const ServicesPage = () => {
 
               <div className="flex justify-between items-center mt-4">
                 <p className="flex items-center gap-2 text-lg font-bold text-purple-600">
-                  <FaMoneyBillWave /> ৳ {service.price}
+                  <FaMoneyBillWave /> {service.price}
                 </p>
                 <button
                   className="btn btn-sm bg-purple-600 text-white hover:bg-purple-700"

@@ -6,6 +6,8 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import Services from "../Pages/Services";
 import ServiceDetails from "../Componants/ServiceDetails";
+import BookingForm from "../Pages/BookingForm";
+
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ export const router = createBrowserRouter([
   path: "services/:id",
   Component: ServiceDetails
 
+      },
+      {
+        path: "book/:id",
+        Component: BookingForm
       }
     ]
   },
