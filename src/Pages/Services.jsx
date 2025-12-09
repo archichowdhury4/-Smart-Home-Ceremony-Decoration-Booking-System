@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 
+// React Icons
+import { FaStar, FaMoneyBillWave } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
+import { BiCategory } from "react-icons/bi";
+
 const ServicesPage = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,6 +19,7 @@ const ServicesPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // Fetch services from server
   useEffect(() => {
     fetch("http://localhost:3000/services")
       .then((res) => res.json())
@@ -23,6 +29,7 @@ const ServicesPage = () => {
       });
   }, []);
 
+  // Filter services dynamically
   const filteredServices = services.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
     const matchesType = typeFilter ? item.type === typeFilter : true;
@@ -34,8 +41,9 @@ const ServicesPage = () => {
 
   const serviceTypes = [...new Set(services.map((s) => s.type))];
 
-  const handleViewDetails = (serviceId) => {
-    if (user) navigate(`/services/${serviceId}`);
+  // Navigate to Service Details
+  const handleViewDetails = (service) => {
+    if (user) navigate(`/services/${service.id}`);
     else navigate("/login");
   };
 
@@ -43,7 +51,7 @@ const ServicesPage = () => {
     <div className="px-6 md:px-16 py-12">
       <h2 className="text-3xl font-bold text-center mb-8">Our Services</h2>
 
-      {/* Search & Filters */}
+      {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
         <input
           type="text"
@@ -111,7 +119,7 @@ const ServicesPage = () => {
             <div
               key={service.id}
               className="p-5 bg-white shadow-md rounded-xl border 
-              hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
               <img
                 src={service.image}
@@ -122,13 +130,19 @@ const ServicesPage = () => {
               <h3 className="text-xl font-semibold mt-4">{service.name}</h3>
               <p className="text-gray-600 mt-2">{service.description}</p>
 
+              <div className="flex flex-col mt-3 gap-2">
+                <p className="flex items-center gap-2 text-gray-700">
+                  <BiCategory className="text-purple-600" /> {service.type}
+                </p>
+              </div>
+
               <div className="flex justify-between items-center mt-4">
-                <p className="text-lg font-bold text-purple-600">
-                  ৳ {service.price}
+                <p className="flex items-center gap-2 text-lg font-bold text-purple-600">
+                  <FaMoneyBillWave /> ৳ {service.price}
                 </p>
                 <button
                   className="btn btn-sm bg-purple-600 text-white hover:bg-purple-700"
-                  onClick={() => handleViewDetails(service.id)}
+                  onClick={() => handleViewDetails(service)}
                 >
                   View Details
                 </button>

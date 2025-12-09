@@ -5,6 +5,7 @@ import AuthLayout from "../Layout/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import Services from "../Pages/Services";
+import ServiceDetails from "../Componants/ServiceDetails";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
       {
         path: "services",
         Component: Services
+      }, 
+      {
+  path: "services/:id",
+  Component: ServiceDetails
+
       }
     ]
   },
