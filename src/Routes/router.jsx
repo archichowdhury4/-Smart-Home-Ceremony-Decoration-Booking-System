@@ -7,6 +7,10 @@ import Register from "../Pages/Auth/Register";
 import Services from "../Pages/Services";
 import ServiceDetails from "../Componants/ServiceDetails";
 import BookingForm from "../Pages/BookingForm";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../Layout/DashboardLayout";
+import MyServices from "../Pages/Dashboard/MyServices";
+
 
 
 export const router = createBrowserRouter([
@@ -47,5 +51,17 @@ export const router = createBrowserRouter([
             Component: Register
         }
     ]
+  },
+  {
+    path:"dashboard",
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children: [
+      {
+        path: "my-services",
+        Component: MyServices
+        
+      }
+    ]
+
   }
 ]);
