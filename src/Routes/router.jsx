@@ -9,7 +9,8 @@ import ServiceDetails from "../Componants/ServiceDetails";
 import BookingForm from "../Pages/BookingForm";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
-import MyServices from "../Pages/Dashboard/MyServices";
+import MyBookings from "../Pages/Dashboard/MyBookings";
+import Payment from "../Payment/Payment";
 
 
 
@@ -57,9 +58,21 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {
-        path: "my-services",
-        Component: MyServices
+        path: "my-bookings",
+        Component: MyBookings
         
+      },
+      {
+        path: 'payment/:parcelId',
+        Component: Payment
+      }, 
+      {
+        path: 'payment-success',
+        Component: PaymentSuccess
+      }, 
+      {
+        path: 'payment-cancelled', 
+        Component: PaymentCancelled
       }
     ]
 

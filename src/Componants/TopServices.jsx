@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import useAuth from "../hooks/useAuth";
 
 const TopServices = () => {
@@ -7,21 +7,27 @@ const TopServices = () => {
   const [loading, setLoading] = useState(true);
 
   const { user } = useAuth();
+  const { id } = useParams();
+
   const navigate = useNavigate();
+  const location = useLocation()
 
   useEffect(() => {
-    fetch("http://localhost:3000/top-services")
-      .then((res) => res.json())
-      .then((data) => {
-        setServices(data);
-        setLoading(false);
-      });
-  }, []);
+  fetch("http://localhost:3000/top-services")
+    .then((res) => res.json())
+    .then((data) => {
+      setServices(data);
+      setLoading(false);
+    });
+}, []);
 
-  const handleViewDetails = (serviceId) => {
-    if (user) navigate(`/services/${serviceId}`);
-    else navigate("/login");
-  };
+const handleViewDetails = (serviceId) => {
+  if (!user) {
+    navigate("/login", { state: { from: location.pathname } });
+    return;
+  }
+  navigate(`/services/${serviceId}`);
+};
 
   return (
     <div className="px-6 md:px-16 py-12">

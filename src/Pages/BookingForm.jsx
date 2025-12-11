@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
-import { useParams } from "react-router";
-
+import { useParams, useNavigate } from "react-router";
 
 const BookingForm = () => {
   const { user } = useAuth();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [service, setService] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
-
-
 
   useEffect(() => {
     fetch(`http://localhost:3000/services/${id}`)
@@ -46,6 +44,9 @@ const BookingForm = () => {
           icon: "success",
           title: "Booking Successful!",
           text: `Your booking for ${service.name} is confirmed.`,
+        }).then(() => {
+          
+          navigate("/services");
         });
         reset();
       })

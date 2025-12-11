@@ -19,7 +19,7 @@ const Navbar = () => {
       <li><NavLink to="/about" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>About</NavLink></li>
        {
             user && <>
-                <li><NavLink to="/dashboard/my-services"  className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>My Parcels</NavLink></li>
+                <li><NavLink to="/dashboard/my-bookings"  className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>My Bookings</NavLink></li>
             </>
         }
       <li><NavLink to="/contact" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>Contact</NavLink></li>

@@ -35,9 +35,9 @@ const DashboardLayout = () => {
 
         {/* dashboards links */}
         <li>
-          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyServices" to="/dashboard/my-services">
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyServices" to="/dashboard/my-bookings">
           <FcServices/>
-          <span className="is-drawer-close:hidden">My Services</span>
+          <span className="is-drawer-close:hidden">My Bookings</span>
           </NavLink>
         </li>
 
