@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyBookings from "../Pages/Dashboard/MyBookings";
 import Payment from "../Payment/Payment";
+import PaymentSuccess from "../Payment/PaymentSuccess";
+import PaymentCancelled from "../Payment/PaymentCancelled";
 
 
 
