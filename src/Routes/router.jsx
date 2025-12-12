@@ -15,6 +15,7 @@ import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentCancelled from "../Payment/PaymentCancelled";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import About from "../Componants/About";
 
 
 
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "book/:id",
         Component: BookingForm
+      },
+      {
+        path: "about",
+        Component: About
       }
     ]
   },

@@ -111,7 +111,7 @@ const MyProfile = () => {
           <p className="text-gray-500">{profile.email || user.email}</p>
         </div>
       </div>
-
+f
       {/* Extra Info */}
       <div className="space-y-2 text-gray-700">
         {editMode ? (
