@@ -16,6 +16,7 @@ import PaymentCancelled from "../Payment/PaymentCancelled";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import About from "../Componants/About";
+import ContactPage from "../Componants/ContactPage";
 
 
 
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "about",
         Component: About
+      },
+      {
+        path: "contact",
+        Component: ContactPage
       }
     ]
   },
