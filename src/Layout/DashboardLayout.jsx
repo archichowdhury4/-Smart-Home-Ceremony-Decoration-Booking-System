@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUser } from 'react-icons/fa';
+import { FaHistory, FaUser } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -42,11 +42,18 @@ const DashboardLayout = () => {
           </NavLink>
         </li>
          <li>
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="PaymentHistory" to="/dashboard/payment-history">
+          <FaHistory />
+          <span className="is-drawer-close:hidden">Payment History</span>
+          </NavLink>
+           </li>
+         <li>
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyProfile" to="/dashboard/my-profile">
           <FaUser/>
           <span className="is-drawer-close:hidden">My Profile</span>
           </NavLink>
            </li>
+           
         {/* List item */}
         <li>
           <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

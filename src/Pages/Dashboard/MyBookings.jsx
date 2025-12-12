@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'; 
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
@@ -42,23 +42,21 @@ const MyBookings = () => {
   };
 
   const handlePayment = async (booking) => {
-    
-      const paymentInfo = {
-        price: booking.price,
-        bookingId: booking._id,
-        userEmail: booking.userEmail,
-        serviceName: booking.serviceName,
-        serviceType: booking.serviceType,
-        date: booking.date,
-      };
-      console.log('Payment Info:', paymentInfo);
+    const paymentInfo = {
+      price: booking.price,
+      bookingId: booking._id,
+      userEmail: booking.userEmail,
+      serviceName: booking.serviceName,
+    };
 
+    try {
       const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
-        console.log(res.data.url);
-        window.location.assign(res.data.url);
-
+      if (res.data?.url) window.location.assign(res.data.url);
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to create payment session.", "error");
     }
-
+  };
 
   return (
     <div>
@@ -69,30 +67,26 @@ const MyBookings = () => {
             <tr>
               <th>#</th>
               <th>Service Name</th>
-              <th>Type</th>
               <th>Price</th>
               <th>Date</th>
-              <th>Message</th>
               <th>Payment</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {bookings.map((item, index) => (
-              <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>{item.serviceName}</td>
-                <td>{item.serviceType}</td>
-                <td>{item.price}</td>
-                <td>{item.date}</td>
-                <td>{item.message}</td>
+            {bookings.map((b, i) => (
+              <tr key={b._id}>
+                <td>{i + 1}</td>
+                <td>{b.serviceName}</td>
+                <td>${b.price}</td>
+                <td>{b.date}</td>
                 <td>
-                  {item.paymentStatus === 'paid' ? (
-                    <span className='text-green-800 font-semibold'>Paid</span>
+                  {b.paymentStatus === "paid" ? (
+                    <span className="text-green-700 font-semibold">Paid</span>
                   ) : (
                     <button
-                      onClick={() => handlePayment(item)}
                       className="btn btn-sm btn-primary text-black"
+                      onClick={() => handlePayment(b)}
                     >
                       Pay
                     </button>
@@ -100,8 +94,8 @@ const MyBookings = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleBookingDelete(item._id)}
                     className="btn btn-sm btn-error text-white"
+                    onClick={() => handleBookingDelete(b._id)}
                   >
                     Delete
                   </button>

@@ -43,7 +43,7 @@ const ServicesPage = () => {
 
   // Navigate to Service Details
   const handleViewDetails = (service) => {
-    if (user) navigate(`/services/${service.id}`);
+    if (user) navigate(`/services/${service._id}`); // <-- MongoDB _id
     else navigate("/login");
   };
 
@@ -117,7 +117,7 @@ const ServicesPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
             <div
-              key={service.id}
+              key={service._id} // <-- MongoDB _id
               className="p-5 bg-white shadow-md rounded-xl border 
                 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
