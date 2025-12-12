@@ -1,20 +1,45 @@
-import React from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, Link } from 'react-router';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const PaymentSuccess = () => {
+    const [searchParams] = useSearchParams();
+    const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState('');
+    const bookingId = searchParams.get('bookingId');
+    const axiosSecure = useAxiosSecure();
+
+   useEffect(() => {
+    if (!bookingId) {
+        setMessage("Invalid booking ID");
+        setLoading(false);
+        return;
+    }
+
+    axiosSecure
+        .patch(`/payment-success/${bookingId}`)
+        .then(() => {
+            setMessage("Payment successful! Booking is now confirmed.");
+        })
+        .catch(() => {
+            setMessage("Payment processed but update failed.");
+        })
+        .finally(() => setLoading(false));
+}, [bookingId]);
+
+
+    if (loading) return (
+        <div className="flex justify-center items-center mt-8">
+            <span className="loading loading-spinner loading-lg"></span>
+        </div>
+    );
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-green-50 p-6">
-            <FaCheckCircle className="text-green-600 w-24 h-24 mb-6 animate-bounce" />
-            <h2 className="text-5xl font-extrabold text-green-700 mb-4">Payment Successful!</h2>
-            <p className="text-lg text-green-800 mb-6">
-                Thank you! Your payment has been processed successfully.
-            </p>
-            <button
-                onClick={() => window.location.href = '/dashboard'}
-                className="bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-green-700 transition"
-            >
-                Go to Dashboard
-            </button>
+        <div className="p-6 text-center max-w-md mx-auto mt-32 bg-white shadow-lg rounded-lg">
+            <h2 className="text-3xl font-bold mb-4">{message}</h2>
+            <Link to="/dashboard/my-bookings">
+                <button className="btn btn-primary text-black mt-4">Go to My Bookings</button>
+            </Link>
         </div>
     );
 };

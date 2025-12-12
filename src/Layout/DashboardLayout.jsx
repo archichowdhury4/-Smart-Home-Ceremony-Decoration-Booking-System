@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaUser } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -35,12 +36,17 @@ const DashboardLayout = () => {
 
         {/* dashboards links */}
         <li>
-          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyServices" to="/dashboard/my-bookings">
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyBookings" to="/dashboard/my-bookings">
           <FcServices/>
           <span className="is-drawer-close:hidden">My Bookings</span>
           </NavLink>
         </li>
-
+         <li>
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyProfile" to="/dashboard/my-profile">
+          <FaUser/>
+          <span className="is-drawer-close:hidden">My Profile</span>
+          </NavLink>
+           </li>
         {/* List item */}
         <li>
           <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

@@ -13,6 +13,7 @@ import MyBookings from "../Pages/Dashboard/MyBookings";
 import Payment from "../Payment/Payment";
 import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentCancelled from "../Payment/PaymentCancelled";
+import MyProfile from "../Pages/Dashboard/MyProfile";
 
 
 
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
         path: "my-bookings",
         Component: MyBookings
         
+      },
+      {
+        path: "my-profile",
+        Component: MyProfile
       },
       {
         path: 'payment/:parcelId',
