@@ -8,9 +8,18 @@ const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data: payments = [] } = useQuery({
-    queryKey: ['payments', user.email],
+    queryKey: ['payments', user?.email],
+    enabled: !!user?.email,
+
     queryFn: async () => {
-      const res = await axiosSecure.get(`/payments?email=${user.email}`);
+      const token = await user.getIdToken();  // 🔥 Firebase token
+
+      const res = await axiosSecure.get(`/payments?email=${user.email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`  // 🔥 Token send to backend
+        }
+      });
+
       return res.data;
     }
   });
@@ -18,6 +27,7 @@ const PaymentHistory = () => {
   return (
     <div>
       <h2 className="text-3xl font-bold mb-4">Payment History: {payments.length}</h2>
+
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           <thead>
@@ -28,6 +38,7 @@ const PaymentHistory = () => {
               <th>Paid Time</th>
             </tr>
           </thead>
+
           <tbody>
             {payments.map((p, i) => (
               <tr key={p._id}>
