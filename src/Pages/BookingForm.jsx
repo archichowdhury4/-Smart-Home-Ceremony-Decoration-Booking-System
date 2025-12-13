@@ -29,6 +29,8 @@ const BookingForm = () => {
       serviceName: service.name,
       serviceType: service.type,
       price: service.price,
+      phone: data.phone,
+      address: data.address,
       date: data.date,
       message: data.message,
     };
@@ -45,7 +47,6 @@ const BookingForm = () => {
           title: "Booking Successful!",
           text: `Your booking for ${service.name} is confirmed.`,
         }).then(() => {
-          
           navigate("/services");
         });
         reset();
@@ -70,6 +71,20 @@ const BookingForm = () => {
         <input type="text" value={service.name} readOnly className="input input-bordered w-full" />
         <input type="text" value={service.type} readOnly className="input input-bordered w-full" />
         <input type="text" value={` ${service.price}`} readOnly className="input input-bordered w-full" />
+
+        {/* Phone & Address Fields */}
+        <input
+          type="text"
+          {...register("phone", { required: true })}
+          placeholder="Your Phone Number"
+          className="input input-bordered w-full"
+        />
+        <input
+          type="text"
+          {...register("address", { required: true })}
+          placeholder="Your Address"
+          className="input input-bordered w-full"
+        />
 
         <input
           type="date"

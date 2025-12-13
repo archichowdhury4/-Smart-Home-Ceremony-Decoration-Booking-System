@@ -17,11 +17,34 @@ const Navbar = () => {
       <li><NavLink to="/" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>Home</NavLink></li>
       <li><NavLink to="/services" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>Services</NavLink></li>
       <li><NavLink to="/about" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>About</NavLink></li>
-       {
-            user && <>
-                <li><NavLink to="/dashboard/my-bookings"  className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>My Bookings</NavLink></li>
-            </>
+      
+      {
+  user && <>
+    <li>
+      <NavLink
+        to="/dashboard/my-bookings"
+        className={({ isActive }) =>
+          `font-semibold ${isActive ? "text-primary" : ""}`
         }
+      >
+        My Bookings
+      </NavLink>
+    </li>
+
+  
+    <li>
+      <NavLink
+        to="/dashboard/apply-decorator"
+        className={({ isActive }) =>
+          `font-semibold ${isActive ? "text-primary" : ""}`
+        }
+      >
+        Apply as Decorator
+      </NavLink>
+    </li>
+  </>
+}
+
       <li><NavLink to="/contact" className={({ isActive }) => `font-semibold ${isActive ? "text-primary" : ""}`}>Contact</NavLink></li>
     </>
   );

@@ -13,26 +13,27 @@ const Login = () => {
 
     const handleLogin = (data) => {
         signInUser(data.email, data.password)
-            .then(result => {
-                // Firebase login success
-                console.log("Logged in user:", result.user);
+  .then(async result => {
+      const user = result.user;
 
-                // Optional: Save user to backend if not exists
-                fetch('http://localhost:3000/users', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: result.user.displayName || 'No Name',
-                        email: result.user.email,
-                        image: result.user.photoURL || ''
-                    })
-                })
-                .then(res => res.json())
-                .then(data => console.log("User saved to DB:", data))
-                .catch(err => console.error("DB save error:", err));
+      
+      const token = await user.getIdToken(); 
 
-                navigate(location?.state || '/');
-            })
+      // Backend e save
+      fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` 
+          },
+          body: JSON.stringify({ name: user.displayName || 'No Name', email: user.email, image: user.photoURL || '' })
+      })
+      .then(res => res.json())
+      .then(data => console.log("User saved to DB:", data));
+
+      navigate(location?.state || '/');
+  })
+
             .catch(error => console.error("Firebase login error:", error));
     };
 

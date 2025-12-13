@@ -17,6 +17,7 @@ import MyProfile from "../Pages/Dashboard/MyProfile";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import About from "../Componants/About";
 import ContactPage from "../Componants/ContactPage";
+import ApplyDecorator from "../Pages/ApplyDecorator";
 
 
 
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
         path: "my-profile",
         Component: MyProfile
       },
+      {
+      path: "apply-decorator",
+      Component: ApplyDecorator
+    },
       {
         path: 'payment/:parcelId',
         Component: Payment

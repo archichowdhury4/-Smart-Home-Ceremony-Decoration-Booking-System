@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 
 const TopServices = () => {
@@ -7,27 +7,29 @@ const TopServices = () => {
   const [loading, setLoading] = useState(true);
 
   const { user } = useAuth();
-  const { id } = useParams();
-
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
-  fetch("http://localhost:3000/top-services")
-    .then((res) => res.json())
-    .then((data) => {
-      setServices(data);
-      setLoading(false);
-    });
-}, []);
+    fetch("http://localhost:3000/top-services")
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching top services:", err);
+        setLoading(false);
+      });
+  }, []);
 
-const handleViewDetails = (serviceId) => {
-  if (!user) {
-    navigate("/login", { state: { from: location.pathname } });
-    return;
-  }
-  navigate(`/services/${serviceId}`);
-};
+  const handleViewDetails = (serviceId) => {
+    if (!user) {
+      navigate("/login", { state: { from: location.pathname } });
+      return;
+    }
+    navigate(`/services/${serviceId}`);
+  };
 
   return (
     <div className="px-6 md:px-16 py-12">
@@ -59,26 +61,26 @@ const handleViewDetails = (serviceId) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
             <div
-              key={service.id}
+              key={service._id} // <-- MongoDB _id use
               className="p-5 bg-white shadow-md rounded-xl border 
               hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
               <img
-                src={service.image}
-                alt={service.name}
+                src={service?.image || "https://via.placeholder.com/400x300"}
+                alt={service?.name || "Service Image"}
                 className="w-full h-48 object-cover rounded-md hover:scale-105 transition duration-300"
               />
 
-              <h3 className="text-xl font-semibold mt-4">{service.name}</h3>
-              <p className="text-gray-600 mt-2">{service.description}</p>
+              <h3 className="text-xl font-semibold mt-4">{service?.name || "No Name"}</h3>
+              <p className="text-gray-600 mt-2">{service?.description || "No description available."}</p>
 
               <div className="flex justify-between items-center mt-4">
                 <p className="text-lg font-bold text-purple-600">
-                  ৳ {service.price}
+                   {service?.price || 0}
                 </p>
                 <button
                   className="btn btn-sm bg-purple-600 text-white hover:bg-purple-700"
-                  onClick={() => handleViewDetails(service.id)}
+                  onClick={() => handleViewDetails(service._id)}
                 >
                   View Details
                 </button>
