@@ -19,6 +19,7 @@ import About from "../Componants/About";
 import ContactPage from "../Componants/ContactPage";
 import ApplyDecorator from "../Pages/ApplyDecorator";
 import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators";
+import UsersManagement from "../Pages/Dashboard/UsersManagement";
 
 
 
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
       {
         path: 'approve-decorators', 
         Component: ApproveDecorators
+      },
+      {
+        path: 'users-management', 
+        Component: UsersManagement
       }
     ]
 

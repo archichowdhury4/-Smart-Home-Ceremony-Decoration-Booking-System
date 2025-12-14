@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHistory, FaUser } from 'react-icons/fa';
+import { FaHistory, FaUser, FaUsers } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { MdCheckCircle } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
@@ -53,6 +53,13 @@ const DashboardLayout = () => {
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="ApproveDecorators" to="/dashboard/approve-decorators">
           <MdCheckCircle/>
           <span className="is-drawer-close:hidden">Approve Decorators</span>
+          </NavLink>
+           </li>
+
+           <li>
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management" to="/dashboard/users-management">
+          <FaUsers/>
+          <span className="is-drawer-close:hidden">Users Management</span>
           </NavLink>
            </li>
 
