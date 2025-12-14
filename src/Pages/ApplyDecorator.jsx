@@ -15,26 +15,33 @@ const ApplyDecorator = () => {
   } = useForm();
 
   const handleApply = (data) => {
-    const decoratorData = {
-      name: user?.displayName,
-      email: user?.email,
-      phone: data.phone,
-      experience: data.experience,
-      serviceCategory: data.serviceCategory,
-      status: 'pending'
-    };
-
-    axiosSecure.post('/decorator-applications', decoratorData)
-      .then(res => {
-        if (res.data.insertedId) {
-          Swal.fire(
-            'Applied!',
-            'Your decorator application is under review',
-            'success'
-          );
-        }
-      });
+  const decoratorData = {
+    name: user?.displayName,
+    email: user?.email,
+    phone: data.phone,
+    experience: data.experience,
+    serviceCategory: data.serviceCategory,
   };
+
+  axiosSecure.post('/decorators', decoratorData)
+    .then(res => {
+      if (res.data.insertedId) {
+        Swal.fire(
+          'Applied!',
+          'Your decorator application is under review',
+          'success'
+        );
+      }
+    })
+    .catch(err => {
+      Swal.fire(
+        'Error',
+        err.response?.data?.message || 'Already applied',
+        'error'
+      );
+    });
+};
+
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow">

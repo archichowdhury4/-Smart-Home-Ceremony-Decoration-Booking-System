@@ -18,6 +18,7 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import About from "../Componants/About";
 import ContactPage from "../Componants/ContactPage";
 import ApplyDecorator from "../Pages/ApplyDecorator";
+import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators";
 
 
 
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path: 'payment-cancelled', 
         Component: PaymentCancelled
+      },
+      {
+        path: 'approve-decorators', 
+        Component: ApproveDecorators
       }
     ]
 
