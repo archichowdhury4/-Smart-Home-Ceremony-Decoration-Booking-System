@@ -20,6 +20,9 @@ import ContactPage from "../Componants/ContactPage";
 import ApplyDecorator from "../Pages/ApplyDecorator";
 import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators";
 import UsersManagement from "../Pages/Dashboard/UsersManagement";
+import ManageServices from "../Pages/Dashboard/ManageServices";
+import ManageBookings from "../Pages/Dashboard/ManageBookings";
+import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
 
 
 
@@ -71,47 +74,61 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path:"dashboard",
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-    children: [
-      {
-        path: "my-bookings",
-        Component: MyBookings
-        
-      },
-      {
-        path: "my-profile",
-        Component: MyProfile
-      },
-      {
+  path: "dashboard",
+  Component: () => (
+    <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    {
+      path: "my-bookings",
+      Component: MyBookings
+    },
+    {
+      path: "my-profile",
+      Component: MyProfile
+    },
+    {
       path: "apply-decorator",
       Component: ApplyDecorator
     },
-      {
-        path: 'payment/:parcelId',
-        Component: Payment
-      },
-      {
-        path: 'payment-history',
-        Component: PaymentHistory
-      }, 
-      {
-        path: 'payment-success',
-        Component: PaymentSuccess
-      }, 
-      {
-        path: 'payment-cancelled', 
-        Component: PaymentCancelled
-      },
-      {
-        path: 'approve-decorators', 
-        Component: ApproveDecorators
-      },
-      {
-        path: 'users-management', 
-        Component: UsersManagement
-      }
-    ]
-
-  }
+    {
+      path: "payment/:parcelId",
+      Component: Payment
+    },
+    {
+      path: "payment-history",
+      Component: PaymentHistory
+    },
+    {
+      path: "payment-success",
+      Component: PaymentSuccess
+    },
+    {
+      path: "payment-cancelled",
+      Component: PaymentCancelled
+    },
+    {
+      path: "approve-decorators",
+      Component: ApproveDecorators
+    },
+    {
+      path: "users-management",
+      Component: UsersManagement
+    },
+    {
+      path: "manage-services",
+      Component: ManageServices
+    },
+    {
+      path: "manage-bookings",
+      Component: ManageBookings
+    },
+    {
+      path: "assign-decorator",
+      Component: AssignDecorator
+    }
+  ]
+}
 ]);

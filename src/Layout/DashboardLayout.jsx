@@ -1,6 +1,8 @@
 import React from 'react';
-import { FaHistory, FaUser, FaUsers } from 'react-icons/fa';
+import { AiOutlineFileDone } from 'react-icons/ai';
+import { FaHistory, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
+import { HiUserAdd } from 'react-icons/hi';
 import { MdCheckCircle } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -53,6 +55,26 @@ const DashboardLayout = () => {
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="ApproveDecorators" to="/dashboard/approve-decorators">
           <MdCheckCircle/>
           <span className="is-drawer-close:hidden">Approve Decorators</span>
+          </NavLink>
+           </li>
+
+            <li>
+          <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Services" to="/dashboard/manage-services">
+          <FaServicestack/>
+          <span className="is-drawer-close:hidden">Manage Services</span>
+          </NavLink>
+           </li>
+              <li>
+           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Bookings" to="/dashboard/manage-bookings">
+          <AiOutlineFileDone/>
+          <span className="is-drawer-close:hidden">Manage Bookings</span>
+          </NavLink>
+           </li>
+
+        <li>
+           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assign Decorator" to="/dashboard/assign-decorator">
+          <HiUserAdd />
+          <span className="is-drawer-close:hidden">Assign Decorator</span>
           </NavLink>
            </li>
 
