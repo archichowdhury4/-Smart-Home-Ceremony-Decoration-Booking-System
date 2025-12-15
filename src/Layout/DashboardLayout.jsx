@@ -1,9 +1,9 @@
 import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
-import { FaHistory, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
+import { FaHistory, FaMoneyBillWave, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { HiUserAdd } from 'react-icons/hi';
-import { MdCheckCircle } from 'react-icons/md';
+import { MdCheckCircle, MdShowChart } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
 
 const DashboardLayout = () => {
@@ -84,6 +84,28 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">Users Management</span>
           </NavLink>
            </li>
+
+           <li>
+       <NavLink
+         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Revenue"
+          to="/dashboard/revenue"
+         >
+          <FaMoneyBillWave />
+           <span className="is-drawer-close:hidden">Revenue</span>
+           </NavLink>
+        </li>
+
+        <li>
+       <NavLink
+         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Service Chart"
+          to="/dashboard/service-chart"
+         >
+          <MdShowChart />
+           <span className="is-drawer-close:hidden">Service Chart</span>
+           </NavLink>
+        </li>
 
          <li>
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyProfile" to="/dashboard/my-profile">

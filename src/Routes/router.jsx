@@ -23,6 +23,8 @@ import UsersManagement from "../Pages/Dashboard/UsersManagement";
 import ManageServices from "../Pages/Dashboard/ManageServices";
 import ManageBookings from "../Pages/Dashboard/ManageBookings";
 import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
+import Revenue from "../Pages/Dashboard/Revenue";
+import ServiceDemandChart from "../Pages/Dashboard/ServiceDemandChart";
 
 
 
@@ -128,7 +130,16 @@ export const router = createBrowserRouter([
     {
       path: "assign-decorator",
       Component: AssignDecorator
-    }
+    },
+    {
+  path: 'revenue',
+  Component: Revenue
+},
+ {
+  path: 'service-chart',
+  Component: ServiceDemandChart
+}
+
   ]
 }
 ]);

@@ -103,9 +103,11 @@ const ApplyDecorator = () => {
           >
             <option value="">Select Category</option>
             <option value="Wedding">Wedding</option>
-            <option value="Home">Home</option>
-            <option value="Office">Office</option>
-            <option value="Seminar">Seminar</option>
+            <option value="Home">Smart Home</option>
+            <option value="Office">Birthday</option>
+            <option value="Seminar">Outdoor</option>
+            <option value="Seminar">Anniversary</option>
+            <option value="Seminar">Baby shower</option>
           </select>
         </div>
 
