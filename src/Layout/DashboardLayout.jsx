@@ -3,10 +3,13 @@ import { AiOutlineFileDone } from 'react-icons/ai';
 import { FaHistory, FaMoneyBillWave, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { HiUserAdd } from 'react-icons/hi';
-import { MdCheckCircle, MdShowChart } from 'react-icons/md';
+import { MdAssignment, MdCheckCircle, MdShowChart } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
+import useRole from '../hooks/UseRole';
 
 const DashboardLayout = () => {
+  const {role} = useRole()
+  console.log("Role", role)
     return (
         <div className="drawer lg:drawer-open">
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -51,7 +54,10 @@ const DashboardLayout = () => {
           </NavLink>
            </li>
 
-            <li>
+        {
+          role === "admin" && <>
+          
+                      <li>
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="ApproveDecorators" to="/dashboard/approve-decorators">
           <MdCheckCircle/>
           <span className="is-drawer-close:hidden">Approve Decorators</span>
@@ -104,6 +110,19 @@ const DashboardLayout = () => {
          >
           <MdShowChart />
            <span className="is-drawer-close:hidden">Service Chart</span>
+           </NavLink>
+        </li>
+          </>
+        }
+
+        <li>
+       <NavLink
+         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="My Assigned Projects"
+          to="/dashboard/my-assigned-projects"
+         >
+          <MdAssignment />
+           <span className="is-drawer-close:hidden">My Assigned Projects</span>
            </NavLink>
         </li>
 

@@ -42,6 +42,18 @@ const Navbar = () => {
         Apply as Decorator
       </NavLink>
     </li>
+
+     <li>
+      <NavLink
+        to="/coverage"
+        className={({ isActive }) =>
+          `font-semibold ${isActive ? "text-primary" : ""}`
+        }
+      >
+        Coverage Area
+      </NavLink>
+    </li>
+
   </>
 }
 

@@ -25,6 +25,9 @@ import ManageBookings from "../Pages/Dashboard/ManageBookings";
 import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
 import Revenue from "../Pages/Dashboard/Revenue";
 import ServiceDemandChart from "../Pages/Dashboard/ServiceDemandChart";
+import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
+import ErrorPage from "../Pages/ErrorPage";
+import Coverage from "../Componants/Coverage";
 
 
 
@@ -58,7 +61,16 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         Component: ContactPage
-      }
+      },
+      {
+        path: "coverage",
+        loader: async () => {
+        const res = await fetch("/ServiceCenters.json");
+         return res.json();
+  },
+  Component: Coverage
+}
+
     ]
   },
   {
@@ -138,8 +150,16 @@ export const router = createBrowserRouter([
  {
   path: 'service-chart',
   Component: ServiceDemandChart
+},
+{
+  path: 'my-assigned-projects',
+  Component: MyAssignedProjects
 }
 
   ]
-}
+},
+   {
+    path: "*",
+    element: <ErrorPage></ErrorPage>,
+  },
 ]);
