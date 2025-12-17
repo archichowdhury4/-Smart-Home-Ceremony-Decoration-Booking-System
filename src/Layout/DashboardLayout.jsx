@@ -54,6 +54,22 @@ const DashboardLayout = () => {
           </NavLink>
            </li>
 
+           {
+          role === "decorator" && <>
+          
+         <li>
+       <NavLink
+         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Assigned Projects"
+          to="/dashboard/assigned-projects"
+         >
+          <MdAssignment />
+           <span className="is-drawer-close:hidden">My Assigned Projects</span>
+           </NavLink>
+        </li>
+</>
+}
+      {/* admin links */}
         {
           role === "admin" && <>
           
@@ -115,16 +131,7 @@ const DashboardLayout = () => {
           </>
         }
 
-        <li>
-       <NavLink
-         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-          data-tip="My Assigned Projects"
-          to="/dashboard/my-assigned-projects"
-         >
-          <MdAssignment />
-           <span className="is-drawer-close:hidden">My Assigned Projects</span>
-           </NavLink>
-        </li>
+       
 
          <li>
           <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyProfile" to="/dashboard/my-profile">

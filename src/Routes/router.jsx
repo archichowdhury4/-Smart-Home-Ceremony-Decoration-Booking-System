@@ -28,6 +28,7 @@ import ServiceDemandChart from "../Pages/Dashboard/ServiceDemandChart";
 import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 import ErrorPage from "../Pages/ErrorPage";
 import Coverage from "../Componants/Coverage";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -123,36 +124,65 @@ export const router = createBrowserRouter([
       path: "payment-cancelled",
       Component: PaymentCancelled
     },
-    {
-      path: "approve-decorators",
-      Component: ApproveDecorators
-    },
-    {
-      path: "users-management",
-      Component: UsersManagement
-    },
-    {
-      path: "manage-services",
-      Component: ManageServices
-    },
-    {
-      path: "manage-bookings",
-      Component: ManageBookings
-    },
-    {
-      path: "assign-decorator",
-      Component: AssignDecorator
-    },
-    {
-  path: 'revenue',
-  Component: Revenue
+   {
+  path: "approve-decorators",
+  element: (
+    <AdminRoute>
+      <ApproveDecorators />
+    </AdminRoute>
+  )
 },
- {
-  path: 'service-chart',
-  Component: ServiceDemandChart
+
+   {
+  path: "users-management",
+  element: (
+    <AdminRoute>
+      <UsersManagement />
+    </AdminRoute>
+  )
 },
 {
-  path: 'my-assigned-projects',
+  path: "manage-services",
+  element: (
+    <AdminRoute>
+      <ManageServices />
+    </AdminRoute>
+  )
+},
+{
+  path: "manage-bookings",
+  element: (
+    <AdminRoute>
+      <ManageBookings />
+    </AdminRoute>
+  )
+},
+{
+  path: "assign-decorator",
+  element: (
+    <AdminRoute>
+      <AssignDecorator />
+    </AdminRoute>
+  )
+},
+{
+  path: "revenue",
+  element: (
+    <AdminRoute>
+      <Revenue />
+    </AdminRoute>
+  )
+},
+{
+  path: "service-chart",
+  element: (
+    <AdminRoute>
+      <ServiceDemandChart />
+    </AdminRoute>
+  )
+},
+{
+  path: 'assigned-projects',
   Component: MyAssignedProjects
 }
 
