@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
-import { FaHistory, FaMoneyBillWave, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
+import { FaDollarSign, FaHistory, FaMoneyBillWave, FaServicestack, FaUser, FaUsers } from 'react-icons/fa';
 import { FcServices } from 'react-icons/fc';
 import { HiUserAdd } from 'react-icons/hi';
 import { MdAssignment, MdCheckCircle, MdShowChart } from 'react-icons/md';
@@ -79,6 +79,18 @@ const DashboardLayout = () => {
            <span className="is-drawer-close:hidden">Todays Schedule</span>
            </NavLink>
         </li>
+
+         <li>
+  <NavLink
+    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+    data-tip="Earnings"
+    to="/dashboard/decorator-earnings" 
+  >
+    <FaDollarSign />
+    <span className="is-drawer-close:hidden">Earnings</span>
+  </NavLink>
+</li>
+
 </>
 }
       {/* admin links */}

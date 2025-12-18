@@ -30,6 +30,8 @@ import ErrorPage from "../Pages/ErrorPage";
 import Coverage from "../Componants/Coverage";
 import AdminRoute from "./AdminRoute";
 import TodaysSchedule from "../Pages/Dashboard/TodaysSchedule";
+import DecoratorEarnings from "../Pages/Dashboard/DecoratorEarnings";
+import DecoratoRoute from "./DecoratoRoute";
 
 
 
@@ -184,12 +186,16 @@ export const router = createBrowserRouter([
 },
 {
   path: 'assigned-projects',
-  Component: MyAssignedProjects
+  element: <DecoratoRoute><MyAssignedProjects/></DecoratoRoute>
 },
 
 {
   path: 'today-schedule',
-  Component: TodaysSchedule
+ element: <DecoratoRoute><TodaysSchedule/></DecoratoRoute>
+},
+{
+  path: "decorator-earnings",
+  Component: <DecoratoRoute><DecoratorEarnings/></DecoratoRoute>
 },
 
 
