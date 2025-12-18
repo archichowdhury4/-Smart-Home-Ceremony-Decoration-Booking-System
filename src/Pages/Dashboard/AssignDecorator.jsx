@@ -39,10 +39,11 @@ const AssignDecorator = () => {
         decoratorEmail: decorator.email
       });
 
-      if (res.data.result?.modifiedCount) {
-        refetchBookings();
-        Swal.fire('Assigned!', 'Decorator assigned successfully', 'success');
-      }
+      if (res.data.modifiedCount > 0) {
+  refetchBookings();
+  Swal.fire('Assigned!', 'Decorator assigned successfully', 'success');
+}
+
     } catch (err) {
       console.error(err);
       Swal.fire('Error', 'Failed to assign decorator', 'error');
