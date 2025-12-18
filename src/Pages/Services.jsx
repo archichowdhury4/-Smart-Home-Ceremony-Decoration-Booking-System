@@ -19,9 +19,9 @@ const ServicesPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Fetch services from server
+  
   useEffect(() => {
-    fetch("http://localhost:3000/services")
+    fetch("https://smart-home-ceremony-deccoration-boo.vercel.app/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
@@ -29,7 +29,7 @@ const ServicesPage = () => {
       });
   }, []);
 
-  // Filter services dynamically
+  
   const filteredServices = services.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
     const matchesType = typeFilter ? item.type === typeFilter : true;

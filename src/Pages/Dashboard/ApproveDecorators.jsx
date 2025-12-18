@@ -140,7 +140,7 @@ const ApproveDecorators = () => {
         </table>
       </div>
 
-      {/* ===== MODAL ===== */}
+      {/* MODAL*/} 
       {selectedDecorator && (
         <dialog className="modal modal-open">
           <div className="modal-box">

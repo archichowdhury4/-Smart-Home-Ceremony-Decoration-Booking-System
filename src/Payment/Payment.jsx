@@ -7,7 +7,7 @@ const Payment = () => {
     const { bookingId } = useParams();
     const axiosSecure = useAxiosSecure();
 
-    // Fetch booking by ID
+
     const { isLoading, data: booking } = useQuery({
         queryKey: ['booking', bookingId],
         queryFn: async () => {
@@ -16,7 +16,7 @@ const Payment = () => {
         }
     });
 
-    // Handle Stripe Payment
+    
    const handlePayment = async () => {
     const paymentInfo = {
         price: booking.price,

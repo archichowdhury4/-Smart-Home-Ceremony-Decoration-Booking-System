@@ -11,7 +11,7 @@ const TopServices = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/top-services")
+    fetch("https://smart-home-ceremony-deccoration-boo.vercel.app/top-services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

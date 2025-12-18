@@ -16,7 +16,7 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // SweetAlert2 success message
+    
     Swal.fire({
       title: 'Thank You!',
       text: 'Your message has been sent successfully!',
@@ -26,7 +26,7 @@ const ContactPage = () => {
 
     console.log("Form Data:", formData);
 
-    // Clear form
+  
     setFormData({ name: "", email: "", message: "" });
   };
 

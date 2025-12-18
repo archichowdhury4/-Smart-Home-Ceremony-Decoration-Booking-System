@@ -7,7 +7,7 @@ const AssignDecorator = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedDecorator, setSelectedDecorator] = useState({});
 
-  // Fetch paid bookings
+  
   const { data: bookings = [], refetch: refetchBookings } = useQuery({
     queryKey: ['paid-bookings'],
     queryFn: async () => {
@@ -16,7 +16,7 @@ const AssignDecorator = () => {
     },
   });
 
-  // Fetch approved decorators
+  
   const { data: decorators = [] } = useQuery({
     queryKey: ['decorators'],
     queryFn: async () => {

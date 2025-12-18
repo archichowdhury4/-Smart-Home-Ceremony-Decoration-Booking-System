@@ -10,14 +10,14 @@ const BookingCard = ({ booking }) => {
   const [loading, setLoading] = useState(false);
 
   const handleUpdateStatus = async () => {
-    if (status === booking.status) return; // kono change na thakle exit
+    if (status === booking.status) return; 
     setLoading(true);
     try {
       await axiosSecure.patch(`/decorator/update-status/${booking._id}`, {
         status,
       });
 
-      // UI te instant update
+      
       queryClient.setQueryData(["todaySchedule"], (oldData) => {
         return oldData.map((b) =>
           b._id === booking._id ? { ...b, status } : b

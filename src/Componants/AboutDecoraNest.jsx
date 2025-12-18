@@ -5,7 +5,7 @@ export default function AboutDecoraNest() {
   return (
     <section className="w-full py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-        {/* Left Text */}
+      
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -24,7 +24,7 @@ export default function AboutDecoraNest() {
           </p>
         </motion.div>
 
-        {/* Right Image */}
+        
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}

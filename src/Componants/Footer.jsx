@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="bg-base-200 text-base-content mt-10 py-10">
       <div className="max-w-6xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
 
-        {/* Contact Section */}
+      
         <div>
           <h2 className="text-lg font-bold mb-3">Contact Us</h2>
           <p className="flex md:items-center gap-2 justify-center md:justify-start">
@@ -22,7 +22,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Social Media */}
+        
         <div>
           <h2 className="text-lg font-bold mb-3">Follow Us</h2>
           <div className="flex items-center justify-center md:justify-start gap-4 text-2xl">
@@ -33,16 +33,16 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Working Hours */}
+        
         <div>
           <h2 className="text-lg font-bold mb-3">Working Hours</h2>
-          <p>Sun - Thu: 9:00 AM – 8:00 PM</p>
-          <p>Saturday: 10:00 AM – 6:00 PM</p>
+          <p>Sun - Thu: 9:00 AM - 8:00 PM</p>
+          <p>Saturday: 10:00 AM - 6:00 PM</p>
           <p>Friday: Closed</p>
         </div>
       </div>
 
-      {/* Bottom Part */}
+  
       <div className="text-center mt-10 border-t pt-5">
         <p>© {new Date().getFullYear()} DecoraNest. All rights reserved.</p>
       </div>

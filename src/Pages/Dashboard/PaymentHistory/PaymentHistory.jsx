@@ -12,11 +12,11 @@ const PaymentHistory = () => {
     enabled: !!user?.email,
 
     queryFn: async () => {
-      const token = await user.getIdToken();  // 🔥 Firebase token
+      const token = await user.getIdToken();  
 
       const res = await axiosSecure.get(`/payments?email=${user.email}`, {
         headers: {
-          Authorization: `Bearer ${token}`  // 🔥 Token send to backend
+          Authorization: `Bearer ${token}` 
         }
       });
 

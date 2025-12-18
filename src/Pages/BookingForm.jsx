@@ -13,7 +13,7 @@ const BookingForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services/${id}`)
+    fetch(`https://smart-home-ceremony-deccoration-boo.vercel.app//services/${id}`)
       .then((res) => res.json())
       .then((data) => setService(data))
       .catch((err) => console.log(err));
@@ -35,7 +35,7 @@ const BookingForm = () => {
       message: data.message,
     };
 
-    fetch("http://localhost:3000/bookings", {
+    fetch("https://smart-home-ceremony-deccoration-boo.vercel.app/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookingData),

@@ -20,7 +20,7 @@ const Login = () => {
       const token = await user.getIdToken(); 
 
       // Backend e save
-      fetch('http://localhost:3000/users', {
+      fetch('https://smart-home-ceremony-deccoration-boo.vercel.app/users', {
           method: 'POST',
           headers: { 
               'Content-Type': 'application/json',

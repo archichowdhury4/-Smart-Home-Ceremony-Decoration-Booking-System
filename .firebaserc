@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "smart-home-ceremony-decoration",
+    "prod": "smart-home-ceremony-decoration"
+  },
+  "targets": {},
+  "etags": {}
+}
