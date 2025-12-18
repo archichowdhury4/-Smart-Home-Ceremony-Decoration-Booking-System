@@ -6,6 +6,7 @@ import { HiUserAdd } from 'react-icons/hi';
 import { MdAssignment, MdCheckCircle, MdShowChart } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
 import useRole from '../hooks/UseRole';
+import { BsCalendar } from 'react-icons/bs';
 
 const DashboardLayout = () => {
   const {role} = useRole()
@@ -65,6 +66,17 @@ const DashboardLayout = () => {
          >
           <MdAssignment />
            <span className="is-drawer-close:hidden">My Assigned Projects</span>
+           </NavLink>
+        </li>
+
+          <li>
+       <NavLink
+         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Todays Schedule"
+          to="/dashboard/today-schedule"
+         >
+          < BsCalendar/>
+           <span className="is-drawer-close:hidden">Todays Schedule</span>
            </NavLink>
         </li>
 </>

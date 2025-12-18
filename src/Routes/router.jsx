@@ -29,6 +29,7 @@ import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 import ErrorPage from "../Pages/ErrorPage";
 import Coverage from "../Componants/Coverage";
 import AdminRoute from "./AdminRoute";
+import TodaysSchedule from "../Pages/Dashboard/TodaysSchedule";
 
 
 
@@ -184,7 +185,13 @@ export const router = createBrowserRouter([
 {
   path: 'assigned-projects',
   Component: MyAssignedProjects
-}
+},
+
+{
+  path: 'today-schedule',
+  Component: TodaysSchedule
+},
+
 
   ]
 },
