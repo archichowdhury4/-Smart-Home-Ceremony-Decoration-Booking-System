@@ -5,22 +5,28 @@ const DecoratorEarnings = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data, isLoading, isError } = useQuery({
-  queryKey: ["decoratorEarnings"],
-  queryFn: async () => {
-    const res = await axiosSecure.get("/decorator/earnings");
-    console.log("Backend response:", res.data); 
-    return res.data;
-  },
-});
-
+    queryKey: ["decoratorEarnings"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/decorator/earnings");
+      return res.data;
+    },
+  });
 
   if (isLoading)
     return <p className="text-center mt-10 animate-pulse">Loading earnings...</p>;
 
   if (isError)
-    return <p className="text-center mt-10 text-red-500">Failed to load earnings.</p>;
+    return (
+      <p className="text-center mt-10 text-red-500">
+        Failed to load earnings.
+      </p>
+    );
 
-  const { total, count, payments } = data;
+  const {
+    total = 0,
+    count = 0,
+    payments = [],
+  } = data || {};
 
   return (
     <div className="p-6 bg-white rounded-xl shadow-md">
@@ -40,6 +46,7 @@ const DecoratorEarnings = () => {
       </div>
 
       <h3 className="text-xl font-semibold mb-2">Payment History</h3>
+
       <div className="max-h-96 overflow-y-auto">
         {payments.length === 0 ? (
           <p className="text-gray-500">No payments received yet.</p>
@@ -58,7 +65,9 @@ const DecoratorEarnings = () => {
                   <td className="p-2 border">{p.serviceName}</td>
                   <td className="p-2 border">${p.amount}</td>
                   <td className="p-2 border">
-                    {new Date(p.paidAt).toLocaleDateString()}
+                    {p.paidAt
+                      ? new Date(p.paidAt).toLocaleDateString()
+                      : "—"}
                   </td>
                 </tr>
               ))}

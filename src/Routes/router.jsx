@@ -46,18 +46,17 @@ export const router = createBrowserRouter([
         Component: Home
       },
       {
-        path: "services",
-        Component: Services
-      }, 
+  path: "services",
+  element: <Services />
+}, 
       {
   path: "services/:id",
-  Component: ServiceDetails
-
-      },
+  element: <ServiceDetails />
+},
       {
-        path: "book/:id",
-        Component: BookingForm
-      },
+  path: "book/:id",
+  element: <BookingForm />
+},
       {
         path: "about",
         Component: About
@@ -112,17 +111,18 @@ export const router = createBrowserRouter([
       Component: ApplyDecorator
     },
     {
-      path: "payment/:parcelId",
+      path: "payment/:bookingId",
       Component: Payment
     },
     {
       path: "payment-history",
       Component: PaymentHistory
     },
-    {
-      path: "payment-success",
-      Component: PaymentSuccess
-    },
+   {
+  path: "/dashboard/payment-success",
+  element: <PaymentSuccess />
+},
+
     {
       path: "payment-cancelled",
       Component: PaymentCancelled
@@ -195,8 +195,13 @@ export const router = createBrowserRouter([
 },
 {
   path: "decorator-earnings",
-  Component: <DecoratoRoute><DecoratorEarnings/></DecoratoRoute>
+  element: (
+    <DecoratoRoute>
+      <DecoratorEarnings />
+    </DecoratoRoute>
+  ),
 },
+
 
 
   ]

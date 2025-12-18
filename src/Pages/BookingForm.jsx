@@ -12,12 +12,16 @@ const BookingForm = () => {
 
   const { register, handleSubmit, reset } = useForm();
 
-  useEffect(() => {
-    fetch(`https://smart-home-ceremony-deccoration-boo.vercel.app//services/${id}`)
-      .then((res) => res.json())
-      .then((data) => setService(data))
-      .catch((err) => console.log(err));
-  }, [id]);
+ useEffect(() => {
+  fetch(`https://smart-home-ceremony-deccoration-boo.vercel.app/services/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log("Service fetched:", data);
+      setService(data)
+    })
+    .catch(err => console.log(err));
+}, [id]);
+
 
   if (!user) return <p className="text-red-500">Login to book this service</p>;
   if (!service) return <p className="text-center mt-10">Loading service...</p>;

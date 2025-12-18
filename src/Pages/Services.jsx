@@ -43,7 +43,7 @@ const ServicesPage = () => {
 
   // Navigate to Service Details
   const handleViewDetails = (service) => {
-    if (user) navigate(`/services/${service._id}`); // <-- MongoDB _id
+    if (user) navigate(`/services/${service._id}`); 
     else navigate("/login");
   };
 

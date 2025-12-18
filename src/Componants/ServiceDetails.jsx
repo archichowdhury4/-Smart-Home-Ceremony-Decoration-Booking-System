@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation, NavLink } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
 
 // React Icons
@@ -9,15 +9,34 @@ import { BiCategory } from "react-icons/bi";
 
 const ServiceDetails = () => {
   const [service, setService] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
+
     fetch(`https://smart-home-ceremony-deccoration-boo.vercel.app/services/${id}`)
-      .then((res) => res.json())
-      .then((data) => setService(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch service");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Fetched service:", data);
+        setService(data); // adjust if API returns { data: {...} }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Service not found or failed to load.");
+        setLoading(false);
+      });
   }, [id]);
 
   const handleBook = () => {
@@ -25,18 +44,25 @@ const ServiceDetails = () => {
     navigate("/login", { state: { from: location.pathname } });
     return;
   }
-  navigate(`/book/${id}`); 
+  navigate(`/book/${id}`);
 };
 
-  if (!service) {
+
+  if (loading) {
     return <p className="text-center mt-10">Loading service details...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center mt-10 text-red-500">{error}</p>;
+  }
+
+  if (!service) {
+    return <p className="text-center mt-10 text-red-500">Service not found.</p>;
   }
 
   return (
     <div className="px-6 md:px-16 py-12">
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
         {/* Left Image */}
         <img
           src={service.image}
@@ -64,7 +90,7 @@ const ServiceDetails = () => {
           {/* Rating */}
           <p className="flex items-center gap-2 text-lg mt-2">
             <FaStar className="text-yellow-500 text-lg" />
-            <span className="font-semibold">Rating:</span> {service.rating}
+            <span className="font-semibold">Rating:</span> {service.rating} 
             <FaUserFriends /> ({service.reviews} reviews)
           </p>
 
@@ -85,16 +111,16 @@ const ServiceDetails = () => {
 
           {/* Price */}
           <p className="flex items-center gap-2 text-3xl font-bold text-purple-600 mt-6">
-            <FaMoneyBillWave />  {service.price}
+            <FaMoneyBillWave /> {service.price}
           </p>
 
-          {/* Button */}
-          <NavLink
+          {/* Book Button */}
+          <button
             onClick={handleBook}
             className="btn bg-purple-600 text-white mt-8 hover:bg-purple-700"
           >
             Book This Service
-          </NavLink>
+          </button>
         </div>
       </div>
     </div>
