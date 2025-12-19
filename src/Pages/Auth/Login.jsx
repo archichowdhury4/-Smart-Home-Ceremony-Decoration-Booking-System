@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from './SocialLogin';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -11,31 +12,60 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const handleLogin = (data) => {
-        signInUser(data.email, data.password)
-  .then(async result => {
-      const user = result.user;
+   const handleLogin = (data) => {
+    signInUser(data.email, data.password)
+        .then(async (result) => {
+            const user = result.user;
 
-      
-      const token = await user.getIdToken(); 
+            const token = await user.getIdToken();
 
-      // Backend e save
-      fetch('https://smart-home-ceremony-deccoration-boo.vercel.app/users', {
-          method: 'POST',
-          headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}` 
-          },
-          body: JSON.stringify({ name: user.displayName || 'No Name', email: user.email, image: user.photoURL || '' })
-      })
-      .then(res => res.json())
-      .then(data => console.log("User saved to DB:", data));
+            // Backend e save
+            fetch('https://smart-home-ceremony-deccoration-boo.vercel.app/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: user.displayName || 'No Name',
+                    email: user.email,
+                    image: user.photoURL || ''
+                })
+            });
 
-      navigate(location?.state || '/');
-  })
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'Welcome back 🎉',
+                timer: 1500,
+                showConfirmButton: false
+            });
 
-            .catch(error => console.error("Firebase login error:", error));
-    };
+            navigate(location?.state || '/');
+        })
+        .catch((error) => {
+            let errorMessage = "Something went wrong!";
+
+        
+            if (error.code === "auth/user-not-found") {
+                errorMessage = "No account found with this email.";
+            } 
+            else if (error.code === "auth/wrong-password") {
+                errorMessage = "Incorrect password. Try again!";
+            }
+            else if (error.code === "auth/invalid-email") {
+                errorMessage = "Invalid email address.";
+            }
+
+        
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: errorMessage
+            });
+        });
+};
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-200/40 via-purple-200/40 to-pink-200/40 px-4">
