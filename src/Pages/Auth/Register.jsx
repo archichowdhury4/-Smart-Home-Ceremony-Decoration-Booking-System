@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from './SocialLogin';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -16,58 +17,70 @@ const Register = () => {
     const axiosSecure = useAxiosSecure();
 
     const handleRegistration = (data) => {
-        console.log("after reg", data.photo[0])
-        const profileImg = data.photo[0];
-        registerUser(data.email, data.password)
-        .then(() =>{
-             
-            // store the image and get the photo url
-            const formData = new FormData()
+    const profileImg = data.photo[0];
+
+    registerUser(data.email, data.password)
+        .then(() => {
+            const formData = new FormData();
             formData.append("image", profileImg);
 
+            const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
 
-          const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`
+            axios.post(image_API_URL, formData)
+                .then(res => {
+                    const photoUrl = res.data.data.url;
 
-          
-            axios.post(image_API_URL,formData)
-            .then(res => {
-              const photoUrl = res.data.data.url;
+                    const userInfo = {
+                        email: data.email,
+                        displayName: data.name,
+                        photoURL: photoUrl
+                    };
 
-               // create user in the database
-                        const userInfo = {
-                            email: data.email,
-                            displayName: data.name,
-                            photoURL: photoUrl
-                        }
-                        axiosSecure.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    console.log('user created in the database');
-                                }
-                            })
+                    axiosSecure.post('/users', userInfo);
 
+                    const userProfile = {
+                        displayName: data.name,
+                        photoURL: photoUrl
+                    };
 
+                    updateUserProfile(userProfile)
+                        .then(() => {
+                            
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Registration Successful!',
+                                text: 'Your account has been created 🎉',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
 
-              //  update user profile
-             const userProfile ={
-              displayName : data.name,
-              photoURL : photoUrl
-             }
-             updateUserProfile(userProfile)
-             .then(()=>{
-              console.log("user profile updated done")
-              navigate(location?.state||"/")
-             })
-           .catch(error =>{
-            console.log(error)
+                            navigate(location?.state || "/");
+                        });
+                });
         })
-        })
-          
-        })
-        .catch(error =>{
-            console.log(error)
-        })
-    }
+        .catch(error => {
+            let errorMessage = "Something went wrong!";
+
+    
+            if (error.code === "auth/email-already-in-use") {
+                errorMessage = "This email is already registered.";
+            }
+            else if (error.code === "auth/weak-password") {
+                errorMessage = "Password should be at least 6 characters.";
+            }
+            else if (error.code === "auth/invalid-email") {
+                errorMessage = "Invalid email address.";
+            }
+
+        
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: errorMessage
+            });
+        });
+};
+
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br 
