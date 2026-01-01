@@ -7,7 +7,7 @@ This is a responsive event decoration booking website.
 https://smart-home-ceremony-decoration.web.app/
 
 ## 🖼 Screenshot
-![Screenshot](./screenshot.png)
+![Screenshot](./Screenshot 2026-01-01 105705.png)
 
 ## 🛠 Technologies Used
 - React
