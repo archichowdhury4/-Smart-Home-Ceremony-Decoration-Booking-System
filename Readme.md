@@ -20,7 +20,7 @@ https://smart-home-ceremony-decoration.web.app/
 - Responsive design
 
 ## ⚙️ How to Run Locally
-1. git clone https://github.com/archichowdhury4/REPO-NAME.git
+1. git clone [https://github.com/archichowdhury4/REPO-NAME.git](https://github.com/archichowdhury4/-Smart-Home-Ceremony-Decoration-Booking-System.git)
 2. cd REPO-NAME
 3. npm install
 4. npm run dev
