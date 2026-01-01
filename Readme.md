@@ -13,6 +13,9 @@ https://smart-home-ceremony-decoration.web.app/
 - React
 - Tailwind CSS
 - JavaScript
+- Node JS
+- Mongodb
+- Express js
 
 ## ✨ Features
 - User login
